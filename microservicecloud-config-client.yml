@@ -12,10 +12,24 @@ spring:
     application:
         name: microservicecloud-config-client
 
+
+  #客户端注册到eureka
 eureka:
-    client:
-        service-url:
-            defaultZone: http://eureka-dev.com:7001/eureka/
+  client:
+    service-url:
+      # defaultZone: http://localhost:7001/eureka/  #与服务端地址保持一致
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+
+  instance:
+    instance-id: ${spring.application.name}:${server.port}-config-client      #修改Status名称
+    prefer-ip-address: true                      #访问路径显示ip地址
+
+#添加微服务的info信息
+info:
+  app.name: gjc-microservicecloud
+  company.name: www.gjc.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
         
 ---
 server:
